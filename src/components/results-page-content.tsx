@@ -1,7 +1,12 @@
+import Link from "next/link";
 import { ArrowLeft, FileText, Globe, Trophy } from "lucide-react";
 import { ArxivIcon, GithubIcon } from "@/components/brand-icons";
+import {
+  ResultImage,
+  ResultPairSide,
+  ResultVideo,
+} from "@/components/result-media";
 import type {
-  PairSide,
   Publication,
   ResultGallery,
   ResultMedia,
@@ -11,10 +16,10 @@ export function ResultsPageHeader({ paper }: { paper: Publication }) {
   return (
     <header className="results-page-header">
       <div className="results-page-inner">
-        <a href="/#publications" className="results-back">
+        <Link href="/#publications" className="results-back">
           <ArrowLeft aria-hidden="true" className="icon-xs" />
           Back to publications
-        </a>
+        </Link>
         <p className="results-eyebrow">
           {paper.venueShort ?? paper.venue} · {paper.year}
         </p>
@@ -168,48 +173,6 @@ function ResultPair({
       <ResultPairSide side={item.after} />
     </div>
   );
-}
-
-function ResultPairSide({ side }: { side: PairSide }) {
-  return (
-    <div className="results-pair-side">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={side.src} alt={side.alt} loading="lazy" />
-      <PairSideLabel text={side.label} />
-    </div>
-  );
-}
-
-function PairSideLabel({ text }: { text?: string }) {
-  if (!text) return null;
-  return <span className="results-pair-label">{text}</span>;
-}
-
-function ResultVideo({
-  item,
-}: {
-  item: Extract<ResultMedia, { kind: "video" }>;
-}) {
-  return (
-    <video
-      src={item.src}
-      poster={item.poster}
-      controls
-      loop
-      muted
-      playsInline
-      preload="metadata"
-    />
-  );
-}
-
-function ResultImage({
-  item,
-}: {
-  item: Extract<ResultMedia, { kind: "image" }>;
-}) {
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src={item.src} alt={item.alt} loading="lazy" />;
 }
 
 function ResultCaption({ text }: { text?: string }) {

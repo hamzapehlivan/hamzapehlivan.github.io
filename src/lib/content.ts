@@ -1,0 +1,278 @@
+export type LinkItem = {
+  label: string;
+  href: string;
+};
+
+export type Publication = {
+  slug: string;
+  title: string;
+  authors: string;
+  venue: string;
+  venueShort?: string;
+  year: number;
+  status?: "Under Review" | "Preprint" | "Published";
+  image: string;
+  imageAlt: string;
+  links: LinkItem[];
+  focus: string[];
+  selected?: boolean;
+  equalContribution?: boolean;
+};
+
+export type TimelineItem = {
+  institution: string;
+  role: string;
+  location: string;
+  period: string;
+  details: string[];
+  logo?: string;
+  logoAlt?: string;
+};
+
+export const profile = {
+  name: "Hamza Pehlivan",
+  title: "Doctoral Researcher",
+  affiliation:
+    "Max Planck Institute for Informatics, Visual Computing and Artificial Intelligence",
+  affiliationShort: "MPI Informatics — VCAI",
+  location: "Saarbrücken, Germany",
+  office: "Campus E1 4, Room 214",
+  email: "hamzapehlivan.cs@gmail.com",
+  github: "https://github.com/hamzapehlivan",
+  linkedin: "https://www.linkedin.com/in/hamza-pehlivan",
+  scholar: "https://scholar.google.com/citations?user=_uQyxOoAAAAJ",
+  mpiPage: "https://people.mpi-inf.mpg.de/~hpehliva/",
+  cv: "/hamza-pehlivan-cv.pdf",
+  photo: "/hamza-pehlivan.jpg",
+  links: {
+    mpiDepartment:
+      "https://www.mpi-inf.mpg.de/departments/visual-computing-and-artificial-intelligence",
+    theobalt: "https://people.mpi-inf.mpg.de/~theobalt/",
+    dundar: "https://www.cs.bilkent.edu.tr/~adundar/",
+    dlrLab: "https://dlr.bilkent.edu.tr/",
+  },
+};
+
+export const navItems = [
+  { label: "About", href: "#about" },
+  { label: "Publications", href: "#publications" },
+  { label: "Teaching", href: "#teaching" },
+  { label: "Education", href: "#education" },
+];
+
+// Add new papers to the top.
+export const publications: Publication[] = [
+  {
+    slug: "lm-is",
+    title: "Second-order Optimization of Gaussian Splats with Importance Sampling",
+    authors:
+      "H. Pehlivan, A. B. Camiletto, L. G. Foo, M. Habermann, C. Theobalt",
+    venue: "arXiv preprint",
+    venueShort: "arXiv",
+    year: 2025,
+    status: "Under Review",
+    image: "/papers/lm-is.png",
+    imageAlt: "Gaussian splatting optimization result comparison",
+    links: [
+      { label: "Project", href: "https://vcai.mpi-inf.mpg.de/projects/LM-IS/" },
+      { label: "arXiv", href: "https://arxiv.org/abs/2504.12905" },
+    ],
+    focus: ["3D Gaussian splatting", "second-order optimization", "importance sampling"],
+    selected: true,
+  },
+  {
+    slug: "warpres",
+    title: "Warping the Residuals for Real Image Editing with StyleGAN",
+    authors: "A. Yildirim, H. Pehlivan, A. Dundar",
+    venue: "International Journal of Computer Vision",
+    venueShort: "IJCV",
+    year: 2024,
+    status: "Published",
+    image: "/papers/warpres.svg",
+    imageAlt: "WarpRes image editing examples",
+    links: [{ label: "arXiv", href: "https://arxiv.org/abs/2312.11422" }],
+    focus: ["real image editing", "StyleGAN", "residual warping"],
+    selected: true,
+  },
+  {
+    slug: "styleres",
+    title: "StyleRes: Transforming the Residuals for Real Image Editing with StyleGAN",
+    authors: "H. Pehlivan, Y. Dalva, A. Dundar",
+    venue: "IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+    venueShort: "CVPR",
+    year: 2023,
+    status: "Published",
+    image: "/papers/styleres.jpg",
+    imageAlt: "StyleRes real image editing examples",
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2212.14359" },
+      { label: "Project", href: "https://www.cs.bilkent.edu.tr/~adundar/projects/StyleRes/" },
+      { label: "Code", href: "https://github.com/hamzapehlivan/StyleRes" },
+    ],
+    focus: ["GAN inversion", "residual transformation", "image editing"],
+    selected: true,
+  },
+  {
+    slug: "diverse-inpainting",
+    title: "Diverse Inpainting and Editing with GAN Inversion",
+    authors: "A. Yildirim*, H. Pehlivan*, B. Bilecen, A. Dundar",
+    venue: "International Conference on Computer Vision",
+    venueShort: "ICCV",
+    year: 2023,
+    status: "Published",
+    image: "/papers/gan-inversion-inpainting.svg",
+    imageAlt: "Diverse inpainting and editing examples",
+    links: [{ label: "arXiv", href: "https://arxiv.org/abs/2307.15033" }],
+    focus: ["image inpainting", "GAN inversion", "diverse editing"],
+    equalContribution: true,
+  },
+  {
+    slug: "vecgan",
+    title: "Face Attribute Editing with Disentangled Latent Vectors",
+    authors: "Y. Dalva, H. Pehlivan, O. I. Hatipoglu, C. Moran, A. Dundar",
+    venue: "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    venueShort: "TPAMI",
+    year: 2023,
+    status: "Published",
+    image: "/papers/vecgan.jpg",
+    imageAlt: "Face attribute editing examples",
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2301.04628" },
+      { label: "Project", href: "https://yusufdalva.github.io/vecgan/" },
+      { label: "Code", href: "https://github.com/yusufdalva/VecGAN" },
+    ],
+    focus: ["face editing", "latent directions", "disentanglement"],
+  },
+  {
+    slug: "robustness-instance-segmentation",
+    title: "Benchmarking the Robustness of Instance Segmentation Models",
+    authors: "Y. Dalva, H. Pehlivan, S. F. Altindis, A. Dundar",
+    venue: "IEEE Transactions on Neural Networks and Learning Systems",
+    venueShort: "TNNLS",
+    year: 2022,
+    status: "Published",
+    image: "/papers/robustness.png",
+    imageAlt: "Robustness benchmark examples for instance segmentation",
+    links: [{ label: "arXiv", href: "https://arxiv.org/abs/2109.01123" }],
+    focus: ["instance segmentation", "robustness", "benchmarking"],
+  },
+];
+
+export const researchAreas = [
+  "3D scene representations",
+  "Gaussian splatting",
+  "Generative image editing",
+  "Image inpainting",
+  "GAN inversion",
+];
+
+export const experience: TimelineItem[] = [
+  {
+    institution: "Bilkent ImageGen Lab",
+    role: "Research Assistant",
+    location: "Ankara, Turkey",
+    period: "Sep 2021 – Jun 2023",
+    details: [
+      "Researched high-fidelity image reconstruction, image editing, and inpainting using StyleGAN; advised by Asst. Prof. Aysegül Dündar.",
+      "Contributed to facial attribute editing methods compared against StyleGAN-based baselines.",
+      "Analyzed robustness of instance segmentation models under lighting, weather, and noise perturbations.",
+    ],
+    logo: "/logos/bilkent.png",
+    logoAlt: "Bilkent University emblem",
+  },
+  {
+    institution: "Jotform",
+    role: "Summer Intern",
+    location: "Ankara, Turkey",
+    period: "Jun 2021 – Jul 2021",
+    details: [
+      "Built a website-based recommendation system: crawled and clustered websites into topics with Python and scikit-learn.",
+    ],
+    logo: "/logos/jotform.svg",
+    logoAlt: "Jotform logo",
+  },
+  {
+    institution: "A2 Technology",
+    role: "Summer Intern",
+    location: "Ankara, Turkey",
+    period: "Jun 2020 – Jul 2020",
+    details: [
+      "Worked on an under-vehicle inspection system combining classical vision and deep learning.",
+      "Implemented image comparison with SIFT descriptors using OpenCV and C++.",
+    ],
+    logo: "/logos/a2.png",
+    logoAlt: "a2 Technology logo",
+  },
+];
+
+export const teaching: TimelineItem[] = [
+  {
+    institution: "Saarland University",
+    role: "Seminar Supervisor",
+    location: "Saarbrücken, Germany",
+    period: "2024",
+    details: [
+      "Supervised the “Volume Rendering” topic in the seminar Classical Concepts of Computer Vision and Computer Graphics in the Neural Age.",
+    ],
+    logo: "/logos/saarland.png",
+    logoAlt: "Saarland University emblem",
+  },
+  {
+    institution: "Bilkent University",
+    role: "Teaching Assistant",
+    location: "Ankara, Turkey",
+    period: "Sep 2021 – Jun 2023",
+    details: [
+      "Computer Networks (3 semesters): designed projects on TCP/UDP protocols.",
+      "Introduction to Python (1 semester): led weekly labs and supported students in programming work.",
+      "Mentored undergraduate research students at ImageGen Lab with Docker and GPU-server tutorials.",
+    ],
+    logo: "/logos/bilkent.png",
+    logoAlt: "Bilkent University emblem",
+  },
+];
+
+export const education: TimelineItem[] = [
+  {
+    institution: "Saarland University & MPI for Informatics",
+    role: "Ph.D. in Computer Science",
+    location: "Saarbrücken, Germany",
+    period: "Nov 2023 – present",
+    details: [
+      "Doctoral researcher in the Visual Computing and Artificial Intelligence department.",
+    ],
+    logo: "/logos/mpg.svg",
+    logoAlt: "Max-Planck-Gesellschaft Minerva mark",
+  },
+  {
+    institution: "Bilkent University",
+    role: "M.Sc. in Computer Science",
+    location: "Ankara, Turkey",
+    period: "Sep 2021 – Jun 2023",
+    details: [
+      "Full departmental scholarship for academic achievement during undergraduate studies.",
+      "CGPA: 3.96 / 4.00.",
+    ],
+    logo: "/logos/bilkent.png",
+    logoAlt: "Bilkent University emblem",
+  },
+  {
+    institution: "Bilkent University",
+    role: "B.Sc. in Computer Science",
+    location: "Ankara, Turkey",
+    period: "Sep 2016 – Jun 2021",
+    details: [
+      "Comprehensive scholarship awarded for high ranking (top ~0.07%) in the University Placement Exam.",
+      "CGPA: 3.52 / 4.00.",
+    ],
+    logo: "/logos/bilkent.png",
+    logoAlt: "Bilkent University emblem",
+  },
+];
+
+export const skills = [
+  { label: "Programming", values: ["Python", "C++", "CUDA"] },
+  { label: "Frameworks & Tools", values: ["PyTorch", "OpenCV", "scikit-learn", "LaTeX"] },
+  { label: "Systems", values: ["Linux", "Docker", "Git"] },
+  { label: "Languages", values: ["Turkish (native)", "English (professional)"] },
+];

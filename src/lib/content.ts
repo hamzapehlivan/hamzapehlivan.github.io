@@ -3,6 +3,17 @@ export type LinkItem = {
   href: string;
 };
 
+export type ResultMedia =
+  | { kind: "image"; src: string; alt: string; caption?: string }
+  | { kind: "video"; src: string; poster?: string; caption?: string };
+
+export type ResultGallery = {
+  title?: string;
+  description?: string;
+  layout?: "grid" | "stack";
+  items: ResultMedia[];
+};
+
 export type Publication = {
   slug: string;
   title: string;
@@ -17,6 +28,8 @@ export type Publication = {
   focus: string[];
   selected?: boolean;
   equalContribution?: boolean;
+  highlight?: string;
+  results?: ResultGallery[];
 };
 
 export type TimelineItem = {
@@ -57,32 +70,64 @@ export const navItems = [
   { label: "About", href: "#about" },
   { label: "Publications", href: "#publications" },
   { label: "Teaching", href: "#teaching" },
+  { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
 ];
 
 // Add new papers to the top.
 export const publications: Publication[] = [
   {
-    slug: "lm-is",
-    title: "Second-order Optimization of Gaussian Splats with Importance Sampling",
+    slug: "lm-rs",
+    title: "Matrix-free Second-order Optimization of Gaussian Splats with Residual Sampling",
     authors:
       "H. Pehlivan, A. B. Camiletto, L. G. Foo, M. Habermann, C. Theobalt",
-    venue: "arXiv preprint",
-    venueShort: "arXiv",
-    year: 2025,
-    status: "Under Review",
+    venue: "International Conference on 3D Vision",
+    venueShort: "3DV",
+    year: 2026,
+    status: "Published",
+    highlight: "Best Paper Candidate",
     image: "/papers/lm-is.png",
     imageAlt: "Gaussian splatting optimization result comparison",
     links: [
-      { label: "Project", href: "https://vcai.mpi-inf.mpg.de/projects/LM-IS/" },
+      { label: "Project", href: "https://vcai.mpi-inf.mpg.de/projects/LM-RS/" },
       { label: "arXiv", href: "https://arxiv.org/abs/2504.12905" },
+      { label: "Code", href: "https://github.com/hamzapehlivan/lm-rs" },
     ],
-    focus: ["3D Gaussian splatting", "second-order optimization", "importance sampling"],
+    focus: ["3D Gaussian splatting", "second-order optimization", "residual sampling"],
     selected: true,
+    results: [
+      {
+        title: "Results",
+        layout: "stack",
+        items: [
+          { kind: "video", src: "/papers/lm-rs/videos/chair.mp4", caption: "Chair" },
+          { kind: "video", src: "/papers/lm-rs/videos/hotdog.mp4", caption: "Hotdog" },
+          { kind: "video", src: "/papers/lm-rs/videos/lego.mp4", caption: "Lego" },
+          { kind: "video", src: "/papers/lm-rs/videos/ship.mp4", caption: "Ship" },
+          { kind: "video", src: "/papers/lm-rs/videos/materials.mp4", caption: "Materials" },
+          { kind: "video", src: "/papers/lm-rs/videos/ficus.mp4", caption: "Ficus" },
+        ],
+      },
+      {
+        title: "360° Comparisons",
+        description: "Both methods are trained for ~15 seconds.",
+        layout: "grid",
+        items: [
+          { kind: "video", src: "/papers/lm-rs/videos/360_comparison_chair.mp4", caption: "Chair" },
+          { kind: "video", src: "/papers/lm-rs/videos/360_comparison_drums.mp4", caption: "Drums" },
+          { kind: "video", src: "/papers/lm-rs/videos/360_comparison_ficus.mp4", caption: "Ficus" },
+          { kind: "video", src: "/papers/lm-rs/videos/360_comparison_hotdog.mp4", caption: "Hotdog" },
+          { kind: "video", src: "/papers/lm-rs/videos/360_comparison_lego.mp4", caption: "Lego" },
+          { kind: "video", src: "/papers/lm-rs/videos/360_comparison_materials.mp4", caption: "Materials" },
+          { kind: "video", src: "/papers/lm-rs/videos/360_comparison_mic.mp4", caption: "Mic" },
+          { kind: "video", src: "/papers/lm-rs/videos/360_comparison_ship.mp4", caption: "Ship" },
+        ],
+      },
+    ],
   },
   {
     slug: "warpres",
-    title: "Warping the Residuals for Real Image Editing with StyleGAN",
+    title: "Warping the Residuals for Image Editing with StyleGAN",
     authors: "A. Yildirim, H. Pehlivan, A. Dundar",
     venue: "International Journal of Computer Vision",
     venueShort: "IJCV",
@@ -168,7 +213,7 @@ export const researchAreas = [
 
 export const experience: TimelineItem[] = [
   {
-    institution: "Bilkent ImageGen Lab",
+    institution: "Bilkent Generative Deep Learning Research Lab",
     role: "Research Assistant",
     location: "Ankara, Turkey",
     period: "Sep 2021 – Jun 2023",
@@ -210,7 +255,7 @@ export const teaching: TimelineItem[] = [
     institution: "Saarland University",
     role: "Seminar Supervisor",
     location: "Saarbrücken, Germany",
-    period: "2024",
+    period: "Nov 2023 – present",
     details: [
       "Supervised the “Volume Rendering” topic in the seminar Classical Concepts of Computer Vision and Computer Graphics in the Neural Age.",
     ],
@@ -273,6 +318,6 @@ export const education: TimelineItem[] = [
 export const skills = [
   { label: "Programming", values: ["Python", "C++", "CUDA"] },
   { label: "Frameworks & Tools", values: ["PyTorch", "OpenCV", "scikit-learn", "LaTeX"] },
-  { label: "Systems", values: ["Linux", "Docker", "Git"] },
+  { label: "Tools", values: ["Linux", "Docker", "Git"] },
   { label: "Languages", values: ["Turkish (native)", "English (professional)"] },
 ];

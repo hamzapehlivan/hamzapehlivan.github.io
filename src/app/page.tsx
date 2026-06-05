@@ -90,7 +90,7 @@ export default function Home() {
                 </a>{" "}
                 in{" "}
                 <a href={profile.links.dlrLab} target="_blank" rel="noreferrer">
-                  Bilkent DLR Lab
+                  Bilkent Generative DLR Lab
                 </a>
                 , working on real image editing and reconstruction with StyleGAN.
               </p>
@@ -100,7 +100,7 @@ export default function Home() {
                   <BookOpen aria-hidden="true" className="icon-xs" />
                   View publications
                 </a>
-                <a href={`mailto:${profile.email}`} className="button button-secondary">
+                <a href="#contact" className="button button-secondary">
                   <Mail aria-hidden="true" className="icon-xs" />
                   Get in touch
                 </a>

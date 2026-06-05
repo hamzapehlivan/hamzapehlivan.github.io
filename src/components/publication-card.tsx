@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { ArrowUpRight, FileText, Globe } from "lucide-react";
+import { ArrowUpRight, FileText, Globe, Trophy } from "lucide-react";
 import { ArxivIcon, GithubIcon } from "@/components/brand-icons";
+import { ResultsButton } from "@/components/results-button";
 import type { Publication } from "@/lib/content";
 
 function LinkIcon({ label }: { label: string }) {
@@ -60,6 +61,12 @@ export function PublicationCard({ publication }: PublicationCardProps) {
           {publication.status && publication.status !== "Published" ? (
             <span className="paper-status">{publication.status}</span>
           ) : null}
+          {publication.highlight ? (
+            <span className="paper-highlight">
+              <Trophy aria-hidden="true" className="icon-xs" />
+              {publication.highlight}
+            </span>
+          ) : null}
         </div>
         <h3>{publication.title}</h3>
         <p className="paper-authors">
@@ -85,6 +92,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
               {link.label}
             </a>
           ))}
+          <ResultsButton publication={publication} />
         </div>
       </div>
     </article>

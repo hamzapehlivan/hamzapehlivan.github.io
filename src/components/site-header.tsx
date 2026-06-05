@@ -26,39 +26,37 @@ function NavLink({ href, label, className, isActive, onClick }: NavLinkProps) {
   );
 }
 
+function pickMostVisibleId(entries: IntersectionObserverEntry[]) {
+  const visible = entries
+    .filter((entry) => entry.isIntersecting)
+    .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+  return visible.length > 0 ? visible[0].target.id : null;
+}
+
+function observeSections(onActive: (id: string) => void) {
+  const targets = navItems
+    .map((item) => document.getElementById(item.href.replace(/^#/, "")))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (targets.length === 0) {
+    return () => {};
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const id = pickMostVisibleId(entries);
+      if (id) onActive(id);
+    },
+    { rootMargin: "-35% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+  );
+
+  targets.forEach((target) => observer.observe(target));
+  return () => observer.disconnect();
+}
+
 function useActiveSection() {
   const [activeId, setActiveId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const targets = navItems
-      .map((item) => document.getElementById(item.href.replace(/^#/, "")))
-      .filter((el): el is HTMLElement => el !== null);
-
-    if (targets.length === 0) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id);
-        }
-      },
-      {
-        rootMargin: "-35% 0px -55% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      },
-    );
-
-    targets.forEach((target) => observer.observe(target));
-
-    return () => observer.disconnect();
-  }, []);
-
+  useEffect(() => observeSections(setActiveId), []);
   return activeId;
 }
 

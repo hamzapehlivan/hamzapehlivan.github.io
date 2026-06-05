@@ -228,7 +228,6 @@ export default function Home() {
       <footer className="site-footer">
         <div className="site-footer-inner">
           <p>© {new Date().getFullYear()} {profile.name}</p>
-          <p>Built with Next.js, TypeScript, Tailwind CSS, and GitHub Pages.</p>
         </div>
       </footer>
     </div>

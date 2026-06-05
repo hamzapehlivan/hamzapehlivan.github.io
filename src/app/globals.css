@@ -1044,6 +1044,25 @@ button:focus-visible {
   gap: 20px;
 }
 
+.results-grid[data-columns="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.results-grid[data-columns="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.results-grid[data-columns="4"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .results-grid[data-columns="3"],
+  .results-grid[data-columns="4"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .results-stack {
   display: flex;
   flex-direction: column;
@@ -1068,6 +1087,51 @@ button:focus-visible {
   background: #000;
 }
 
+.results-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--line);
+}
+
+.results-pair-side {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  overflow: hidden;
+}
+
+.results-pair-side img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+}
+
+.results-pair-label {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #000 65%, transparent);
+  color: #fff;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+@media (max-width: 540px) {
+  .results-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
 .results-item figcaption {
   padding: 10px 14px;
   color: var(--ink);
@@ -1083,7 +1147,7 @@ button:focus-visible {
 @media (max-width: 640px) {
   .results-page-inner { padding: 20px 16px 24px; }
   .results-page-main { padding: 20px 16px 40px; gap: 28px; }
-  .results-grid { grid-template-columns: 1fr; }
+  .results-grid { grid-template-columns: 1fr !important; }
 }
 
 /* ---------- Timeline ---------- */
@@ -1246,6 +1310,18 @@ button:focus-visible {
   border-radius: 999px;
   background: var(--accent);
   content: "";
+}
+
+.bullet-item a {
+  color: var(--accent);
+  font-weight: 600;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: border-color 160ms ease;
+}
+
+.bullet-item a:hover,
+.bullet-item a:focus-visible {
+  border-color: var(--accent);
 }
 
 /* ---------- Education + Skills layout ---------- */

@@ -1,6 +1,11 @@
 import { ArrowLeft, FileText, Globe, Trophy } from "lucide-react";
 import { ArxivIcon, GithubIcon } from "@/components/brand-icons";
-import type { Publication, ResultGallery, ResultMedia } from "@/lib/content";
+import type {
+  PairSide,
+  Publication,
+  ResultGallery,
+  ResultMedia,
+} from "@/lib/content";
 
 export function ResultsPageHeader({ paper }: { paper: Publication }) {
   return (
@@ -106,14 +111,16 @@ function LinkLabelIcon({ label }: { label: string }) {
 }
 
 function ResultsSection({ gallery }: { gallery: ResultGallery }) {
-  const layoutClass = gallery.layout === "stack" ? "results-stack" : "results-grid";
+  const isStack = gallery.layout === "stack";
+  const layoutClass = isStack ? "results-stack" : "results-grid";
+  const dataColumns = !isStack && gallery.columns ? String(gallery.columns) : undefined;
   return (
     <section className="results-section">
       <SectionTitle text={gallery.title} />
       <SectionDescription text={gallery.description} />
-      <div className={layoutClass}>
+      <div className={layoutClass} data-columns={dataColumns}>
         {gallery.items.map((item, idx) => (
-          <ResultItem key={`${item.src}-${idx}`} item={item} />
+          <ResultItem key={`${itemKey(item)}-${idx}`} item={item} />
         ))}
       </div>
     </section>
@@ -130,6 +137,11 @@ function SectionDescription({ text }: { text?: string }) {
   return <p className="results-section-desc">{text}</p>;
 }
 
+function itemKey(item: ResultMedia): string {
+  if (item.kind === "pair") return item.before.src;
+  return item.src;
+}
+
 function ResultItem({ item }: { item: ResultMedia }) {
   return (
     <figure className="results-item">
@@ -141,7 +153,36 @@ function ResultItem({ item }: { item: ResultMedia }) {
 
 function ResultMediaElement({ item }: { item: ResultMedia }) {
   if (item.kind === "video") return <ResultVideo item={item} />;
+  if (item.kind === "pair") return <ResultPair item={item} />;
   return <ResultImage item={item} />;
+}
+
+function ResultPair({
+  item,
+}: {
+  item: Extract<ResultMedia, { kind: "pair" }>;
+}) {
+  return (
+    <div className="results-pair">
+      <ResultPairSide side={item.before} />
+      <ResultPairSide side={item.after} />
+    </div>
+  );
+}
+
+function ResultPairSide({ side }: { side: PairSide }) {
+  return (
+    <div className="results-pair-side">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={side.src} alt={side.alt} loading="lazy" />
+      <PairSideLabel text={side.label} />
+    </div>
+  );
+}
+
+function PairSideLabel({ text }: { text?: string }) {
+  if (!text) return null;
+  return <span className="results-pair-label">{text}</span>;
 }
 
 function ResultVideo({

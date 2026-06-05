@@ -65,8 +65,8 @@ export default function Home() {
               </h1>
 
               <p className="hero-summary">
-                I work on 3D scene representations, generative image editing,
-                and inpainting at the Max Planck Institute for Informatics.
+                My research focuses on efficient 3D/4D representations for efficient
+                mapping, with current work on fast optimizers for Gaussian Splatting training.
               </p>
 
               <p className="hero-bio">

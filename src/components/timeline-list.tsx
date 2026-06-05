@@ -1,9 +1,37 @@
 import Image from "next/image";
+import { Fragment } from "react";
 import type { TimelineItem } from "@/lib/content";
 
 type TimelineListProps = {
   items: TimelineItem[];
 };
+
+const MARKDOWN_LINK = /\[([^\]]+)\]\(([^)]+)\)/g;
+
+function renderDetail(text: string) {
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let key = 0;
+  for (const match of text.matchAll(MARKDOWN_LINK)) {
+    const [full, label, href] = match;
+    const start = match.index ?? 0;
+    if (start > lastIndex) {
+      nodes.push(
+        <Fragment key={`t-${key++}`}>{text.slice(lastIndex, start)}</Fragment>,
+      );
+    }
+    nodes.push(
+      <a key={`a-${key++}`} href={href} target="_blank" rel="noreferrer">
+        {label}
+      </a>,
+    );
+    lastIndex = start + full.length;
+  }
+  if (lastIndex < text.length) {
+    nodes.push(<Fragment key={`t-${key++}`}>{text.slice(lastIndex)}</Fragment>);
+  }
+  return nodes;
+}
 
 export function TimelineList({ items }: TimelineListProps) {
   return (
@@ -42,7 +70,7 @@ export function TimelineList({ items }: TimelineListProps) {
             <ul className="timeline-bullets">
               {item.details.map((detail) => (
                 <li key={detail} className="bullet-item">
-                  {detail}
+                  {renderDetail(detail)}
                 </li>
               ))}
             </ul>

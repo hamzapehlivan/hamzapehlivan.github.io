@@ -142,7 +142,7 @@ export const publications: Publication[] = [
       { label: "arXiv", href: "https://arxiv.org/abs/2504.12905" },
       { label: "Code", href: "https://github.com/hamzapehlivan/lm-rs" },
     ],
-    focus: ["3D Gaussian Splatting", "Second-order Optimization", "Levenberg-Marquardt", "Forward Differentiation"],
+    focus: ["3D Gaussian Splatting", "Matrix-free Optimization", "Levenberg-Marquardt", "Forward Differentiation", "CUDA"],
     results: [
       {
         title: "Results",

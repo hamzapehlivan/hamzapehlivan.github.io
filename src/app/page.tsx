@@ -65,7 +65,7 @@ export default function Home() {
               </h1>
 
               <p className="hero-summary">
-                My research focuses on efficient 3D/4D representations for efficient
+                My research focuses on efficient 3D/4D representations for real-world
                 mapping, with current work on fast optimizers for Gaussian Splatting training.
               </p>
 

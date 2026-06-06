@@ -19,7 +19,7 @@ export function ProfilePanel() {
         </div>
         <div>
           <p className="profile-kicker">Doctoral Researcher</p>
-          <p className="profile-title">3D scenes, generative editing, and inpainting.</p>
+          <p className="profile-title">Efficient 3D/4D Scene Mapping</p>
         </div>
       </div>
 

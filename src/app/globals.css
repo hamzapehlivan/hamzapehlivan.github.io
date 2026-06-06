@@ -306,24 +306,6 @@ button:focus-visible {
   content: "";
 }
 
-.hero-band::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 40%;
-  pointer-events: none;
-  background-image:
-    repeating-linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--accent) 12%, transparent) 0 1px,
-      transparent 1px 14px
-    );
-  -webkit-mask-image: radial-gradient(circle at 85% 18%, black, transparent 60%);
-  mask-image: radial-gradient(circle at 85% 18%, black, transparent 60%);
-  content: "";
-}
-
 .hero-band > * {
   position: relative;
   width: 100%;

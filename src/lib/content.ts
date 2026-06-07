@@ -81,6 +81,7 @@ export const navItems = [
   { label: "Teaching", href: "#teaching" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
+  { label: "Contact", href: "#contact" },
 ];
 
 // ---- StyleRes results helpers ----

@@ -16,7 +16,7 @@ export function ResultsButton({ publication }: ResultsButtonProps) {
       aria-label={`Result gallery for ${publication.title}`}
     >
       <Images aria-hidden="true" className="icon-xs" />
-      Result gallery
+      Result Gallery
     </Link>
   );
 }

@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { ArrowUpRight, FileText, Globe, Trophy } from "lucide-react";
+import { ArrowUpRight, FileText, Globe, Spotlight, Trophy } from "lucide-react";
 import { ArxivIcon, GithubIcon } from "@/components/brand-icons";
 import { ResultsButton } from "@/components/results-button";
-import type { Publication } from "@/lib/content";
+import type { Publication, PublicationHighlight } from "@/lib/content";
 
 function LinkIcon({ label }: { label: string }) {
   const className = "icon-xs";
@@ -36,6 +36,31 @@ function HighlightedAuthors({ authors }: { authors: string }) {
   );
 }
 
+function HighlightIcon({ icon }: { icon: PublicationHighlight["icon"] }) {
+  if (icon === "spotlight") {
+    return <Spotlight aria-hidden="true" className="icon-xs" />;
+  }
+  return <Trophy aria-hidden="true" className="icon-xs" />;
+}
+
+function HighlightBadges({
+  highlights,
+}: {
+  highlights?: PublicationHighlight[];
+}) {
+  if (!highlights?.length) return null;
+  return (
+    <>
+      {highlights.map((highlight) => (
+        <span key={highlight.label} className="paper-highlight">
+          <HighlightIcon icon={highlight.icon} />
+          {highlight.label}
+        </span>
+      ))}
+    </>
+  );
+}
+
 type PublicationCardProps = {
   publication: Publication;
 };
@@ -61,12 +86,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
           {publication.status && publication.status !== "Published" ? (
             <span className="paper-status">{publication.status}</span>
           ) : null}
-          {publication.highlight ? (
-            <span className="paper-highlight">
-              <Trophy aria-hidden="true" className="icon-xs" />
-              {publication.highlight}
-            </span>
-          ) : null}
+          <HighlightBadges highlights={publication.highlights} />
         </div>
         <h3>{publication.title}</h3>
         <p className="paper-authors">

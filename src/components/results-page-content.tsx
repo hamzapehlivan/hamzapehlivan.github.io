@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, FileText, Globe, Trophy } from "lucide-react";
+import { ArrowLeft, FileText, Globe, Spotlight, Trophy } from "lucide-react";
 import { ArxivIcon, GithubIcon } from "@/components/brand-icons";
 import {
   ResultImage,
@@ -8,6 +8,7 @@ import {
 } from "@/components/result-media";
 import type {
   Publication,
+  PublicationHighlight,
   ResultGallery,
   ResultMedia,
 } from "@/lib/content";
@@ -28,7 +29,7 @@ export function ResultsPageHeader({ paper }: { paper: Publication }) {
           <PaperAuthors authors={paper.authors} />
           <EqualContributionNote show={paper.equalContribution} />
         </p>
-        <HighlightBadge text={paper.highlight} />
+        <HighlightBadges highlights={paper.highlights} />
         <div className="results-page-links">
           <PaperLinks paper={paper} />
         </div>
@@ -55,13 +56,28 @@ function EqualContributionNote({ show }: { show?: boolean }) {
   return <span className="paper-note"> &nbsp;* equal contribution</span>;
 }
 
-function HighlightBadge({ text }: { text?: string }) {
-  if (!text) return null;
+function HighlightIcon({ icon }: { icon: PublicationHighlight["icon"] }) {
+  if (icon === "spotlight") {
+    return <Spotlight aria-hidden="true" className="icon-xs" />;
+  }
+  return <Trophy aria-hidden="true" className="icon-xs" />;
+}
+
+function HighlightBadges({
+  highlights,
+}: {
+  highlights?: PublicationHighlight[];
+}) {
+  if (!highlights?.length) return null;
   return (
-    <p className="results-page-highlight">
-      <Trophy aria-hidden="true" className="icon-xs" />
-      {text}
-    </p>
+    <div className="results-page-highlights">
+      {highlights.map((highlight) => (
+        <span key={highlight.label} className="results-page-highlight">
+          <HighlightIcon icon={highlight.icon} />
+          {highlight.label}
+        </span>
+      ))}
+    </div>
   );
 }
 

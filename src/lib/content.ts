@@ -19,6 +19,11 @@ export type ResultGallery = {
   items: ResultMedia[];
 };
 
+export type PublicationHighlight = {
+  label: "Best Paper Candidate" | "Oral";
+  icon: "trophy" | "spotlight";
+};
+
 export type Publication = {
   slug: string;
   title: string;
@@ -32,7 +37,7 @@ export type Publication = {
   links: LinkItem[];
   focus: string[];
   equalContribution?: boolean;
-  highlight?: string;
+  highlights?: PublicationHighlight[];
   results?: ResultGallery[];
 };
 
@@ -134,7 +139,10 @@ export const publications: Publication[] = [
     venueShort: "3DV",
     year: 2026,
     status: "Published",
-    highlight: "Best Paper Candidate",
+    highlights: [
+      { label: "Best Paper Candidate", icon: "trophy" },
+      { label: "Oral", icon: "spotlight" },
+    ],
     image: "/papers/lm-is.png",
     imageAlt: "Gaussian splatting optimization result comparison",
     links: [

@@ -940,11 +940,17 @@ button:focus-visible {
   line-height: 1.5;
 }
 
+.results-page-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
 .results-page-highlight {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin: 0 0 18px;
   padding: 5px 12px;
   border: 1px solid color-mix(in srgb, #b8860b 45%, transparent);
   border-radius: 999px;

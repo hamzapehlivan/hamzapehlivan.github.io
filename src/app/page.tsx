@@ -79,7 +79,7 @@ export default function Home() {
                 >
                   Max Planck Institute for Informatics
                 </a>
-                , advised by Prof.{" "}
+                , advised by Prof. Dr.{" "}
                 <a href={profile.links.theobalt} target="_blank" rel="noreferrer">
                   Christian Theobalt
                 </a>

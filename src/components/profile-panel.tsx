@@ -41,7 +41,7 @@ export function ProfilePanel() {
           <div>
             <span className="label">Advisor</span>
             <p>
-              Prof.{" "}
+              Prof. Dr.{" "}
               <a href={profile.links.theobalt} target="_blank" rel="noreferrer">
                 Christian Theobalt
               </a>
